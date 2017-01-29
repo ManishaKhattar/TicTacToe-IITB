@@ -3,6 +3,8 @@ package in.codingninjas.tictactoe;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
@@ -35,6 +37,43 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        this.getMenuInflater().inflate(R.menu.main_menu, menu);
+        return  true;
+    }
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if(id == R.id.newGame){
+            resetBoard();
+        }else if(id == R.id.boardSize_3){
+            n = 3;
+            setUpBoard();
+        }else if(id == R.id.boardSize_4){
+            n = 4;
+            setUpBoard();
+        }else if(id == R.id.boardSize_5){
+            n = 5;
+            setUpBoard();
+        }
+        return true;
+    }
+
+    private void resetBoard() {
+
+        for(int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                buttons[i][j].setText(" ");
+                buttons[i][j].setPlayer(0);
+            }
+        }
+        gameOver = false;
+        player1Turn = true;
+    }
 
     private void setUpBoard() {
         player1Turn = true;
